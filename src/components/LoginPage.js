@@ -28,8 +28,8 @@ export default function LoginPage (){
 
         })
         .catch(err => {
-            alert(err.response.data.message);
-            console.log(err);
+            alert(err.response.data);
+            console.log(err.response);
         })
     }
     return (
@@ -37,8 +37,8 @@ export default function LoginPage (){
             <Container>
                 <h1>MyWallet</h1>
                 <form onSubmit={loginUser}>
-                    <input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/>
-                    <input type="password" placeholder="senha" value={password} onChange={e => setPassword(e.target.value)}/>
+                    <input type="text" required placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/>
+                    <input type="password" required placeholder="senha" value={password} onChange={e => setPassword(e.target.value)}/>
                     <button type="submit">Entrar</button>
                 </form>
                 <Link to="/register" style={{ textDecoration: 'none' }}>
