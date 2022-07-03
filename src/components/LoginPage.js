@@ -6,7 +6,7 @@ import UserContext from "../context/UserContext";
 
 export default function LoginPage (){
     
-    const { token, setToken } = React.useContext(UserContext);
+    const { token, setToken, name, setName } = React.useContext(UserContext);
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
@@ -24,6 +24,7 @@ export default function LoginPage (){
             
             console.log(response.data);
             setToken(response.data.token);
+            setName(response.data.name);
             navigate("/home");
 
         })

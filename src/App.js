@@ -12,11 +12,11 @@ import EntradasPage from "./components/EntradasPage";
 function App() {
 
   const [token, setToken] = React.useState('');
-  const url = "http://localhost:5000";
+  const [name, setName] = React.useState('');
 
   return (
     <>
-    <UserContext.Provider value={{token, setToken, url}}>
+    <UserContext.Provider value={{token, setToken, name, setName}}>
       <BrowserRouter>
         <Routes>
           <Route  path="/" element={<LoginPage/>}/>
