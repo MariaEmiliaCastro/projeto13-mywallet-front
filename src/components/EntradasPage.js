@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 
 export default function EntradasPage () {
-    const { token } = React.useContext(UserContext);
+    const { token, url } = React.useContext(UserContext);
     const [ value, setValue ] = React.useState('');
     const [ description, setDescription] = React.useState('');
 
@@ -26,7 +26,7 @@ export default function EntradasPage () {
             description
         }
 
-        const promise = axios.post("http://localhost:5000/registro", payload, config);
+        const promise = axios.post(`${url}/registro`, payload, config);
         promise.then( response => {
             console.log(response.data);
             navigate("/home");

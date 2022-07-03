@@ -7,7 +7,7 @@ import UserContext from "../context/UserContext";
 export default function SaidasPage () {
 
     
-    const { token } = React.useContext(UserContext);
+    const { token, url } = React.useContext(UserContext);
     const [value, setValue] = React.useState('');
     const [description, setDescription] = React.useState('');
 
@@ -28,7 +28,7 @@ export default function SaidasPage () {
             description
         }
 
-        const promise = axios.post("http://localhost:5000/registro", payload, config);
+        const promise = axios.post(`${url}/registro`, payload, config);
         promise.then( response => {
             console.log(response.data);
             navigate("/home");

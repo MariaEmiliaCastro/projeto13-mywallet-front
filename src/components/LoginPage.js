@@ -6,7 +6,7 @@ import UserContext from "../context/UserContext";
 
 export default function LoginPage (){
     
-    const { token, setToken, name, setName } = React.useContext(UserContext);
+    const { token, setToken, name, setName, url } = React.useContext(UserContext);
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
@@ -19,7 +19,7 @@ export default function LoginPage (){
             password
         };
 
-        const promise = axios.post("http://localhost:5000/signin", payload);
+        const promise = axios.post(`${url}/signin`, payload);
         promise.then( response => {
             
             console.log(response.data);

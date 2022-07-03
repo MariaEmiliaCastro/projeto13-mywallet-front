@@ -25,7 +25,7 @@ export default function RegisterPage () {
                 password
             }
     
-            const promise = axios.post(`http://localhost:5000/signup`, data);
+            const promise = axios.post(`${url}/signup`, data);
             promise.then(response => {
                 navigate("/");
             })

@@ -13,10 +13,11 @@ function App() {
 
   const [token, setToken] = React.useState('');
   const [name, setName] = React.useState('');
+  const [url, setUrl] = React.useState('http://localhost:5000');
 
   return (
     <>
-    <UserContext.Provider value={{token, setToken, name, setName}}>
+    <UserContext.Provider value={{token, setToken, name, setName, url}}>
       <BrowserRouter>
         <Routes>
           <Route  path="/" element={<LoginPage/>}/>
