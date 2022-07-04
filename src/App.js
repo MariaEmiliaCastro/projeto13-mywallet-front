@@ -13,7 +13,7 @@ function App() {
 
   const [token, setToken] = React.useState('');
   const [name, setName] = React.useState('');
-  const [url, setUrl] = React.useState('http://localhost:5000');
+  const [url, setUrl] = React.useState('https://projeto-driven-13.herokuapp.com');
 
   return (
     <>
