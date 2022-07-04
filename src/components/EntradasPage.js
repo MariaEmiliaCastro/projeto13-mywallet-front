@@ -48,7 +48,7 @@ export default function EntradasPage () {
                 <form onSubmit={registrar}>
                     <input type="text" required placeholder="Valor" value={value} onChange={e => setValue(e.target.value)}/>
                     <input type="text" required placeholder="Descrição" value={description} onChange={e => setDescription(e.target.value)}/>
-                    <button type="submit">Atualizar Entrada</button>
+                    <button type="submit">Salvar Entrada</button>
                 </form>
             </Container>
         </>

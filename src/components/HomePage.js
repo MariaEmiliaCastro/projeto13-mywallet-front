@@ -9,9 +9,8 @@ export default function HomePage () {
 
     const { token, name, url } = React.useContext(UserContext);
     const [ meusRegistros, setMeusRegistros ] = React.useState('');
-    const [saldo, setSaldo] = React.useState(0);
-    const [sinal, setSinal] = React.useState('#03AC00')
-    let tmpSaldo = 0;
+    const [saldo, setSaldo] = React.useState(null);
+    
 
     const navigate = useNavigate();
 
@@ -26,9 +25,8 @@ export default function HomePage () {
         const promise = axios.get(`${url}/registro`, config);
         promise.then( res => {
             if(res.data.length > 0 || res !== undefined){
-                setMeusRegistros(res.data);
-                calculaSaldo();
-                console.log(meusRegistros);
+                setMeusRegistros(res.data.userData);     
+                setSaldo(res.data.total);
             }else{
                 console.log("Sem Atividades Cadastradas!");
             }
@@ -59,29 +57,21 @@ export default function HomePage () {
     }
 
     function loadRegistros() {
-        if(meusRegistros.length === 0 || meusRegistros === undefined){
+        if(meusRegistros.length === 0 || meusRegistros === undefined || saldo === undefined){
             return <div className="no-registry">Não há registros de<br/>entrada ou saída</div>
-        }else{
-            return (meusRegistros.map(registro => <Registro date={registro.date} description={registro.description} value={registro.value} type={registro.type}/>))
+        }else{  
+            console.log(saldo);
+            return (meusRegistros.map((registro, index) => <Registro date={registro.date} description={registro.description} value={registro.value} type={registro.type} key={index}/>))
         }            
     }
 
-    const calculaSaldo = () => {
-        const valor = meusRegistros.map(function (registro) {
-            tmpSaldo += parseFloat(registro.value.replace(/,/g, '.'));
-            setSaldo(tmpSaldo);
-            if(saldo < 0) {
-                setSinal('#C70000');
-            }else{
-                setSinal('#03AC00');
-            }
-
-            return saldo;
-        })
-
-        console.log(saldo.toFixed(2));
+    const saldoColor = () => {
+        if(saldo >= 0){
+            return '#03AC00';
+        }else{
+            return '#C70000';
+        }
     }
-
     const mostraRegistros = loadRegistros();
 
     return (
@@ -96,9 +86,9 @@ export default function HomePage () {
                         {mostraRegistros}
                     </ListaRegistros>
                     
-                    <Saldo sinal={sinal}>
+                    <Saldo>
                         <span className="saldo-name">Saldo</span>
-                        <span className="saldo-value">{String(saldo.toFixed(2)).replace('.', ',')}</span>
+                        <span className="saldo-value" style={{color: saldoColor()}}>{saldo === null ? '0,00' : String(saldo.toFixed(2)).replace('.', ',')}</span>
                     </Saldo>
                 </RegistrosCard>
                 <BottomPart>
@@ -198,11 +188,6 @@ const Saldo = styled.div`
         font-weight: 700;
         color: #000000;
     }
-
-    .saldo-value {
-        color: ${props => props.sinal};
-    }
-    
 `
 
 const BottomPart = styled.div`

@@ -49,7 +49,7 @@ export default function SaidasPage () {
                 <form onSubmit={registrar}>
                     <input type="text" required placeholder="Valor" value={value} onChange={e => setValue(e.target.value)} />
                     <input type="text" required placeholder="Descrição" value={description} onChange={e => setDescription(e.target.value)} />
-                    <button type="submit">Atualizar Saída</button>
+                    <button type="submit">Salvar Saída</button>
                 </form>
             </Container>
         </>

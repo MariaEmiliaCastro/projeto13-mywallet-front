@@ -10,7 +10,7 @@ export default function RegisterPage () {
     const [password, setPassword] = React.useState ('');
     const [retypePassword, setRetypePassword] = React.useState('');
     const [name, setName] = React.useState('');
-    const url = React.useContext(UserContext);
+    const {url} = React.useContext(UserContext);
 
     const navigate = useNavigate();
 
